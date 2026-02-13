@@ -2,20 +2,37 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Brain, Code, Database, Cpu, TrendingUp, Boxes } from 'lucide-react'
+import { Brain, Code, TrendingUp, Boxes } from 'lucide-react'
 
 const skills = [
   {
-    category: 'Programming & DSA',
+    category: 'Programming Languages ',
     icon: Code,
     items: [
+      'C',
+      'C++',
+      'C#',
       'Java',
       'Python',
       'JavaScript',
+      'TypeScript',
+      'Solidity',
+      'SQL',
+      
+      
+    ],
+    color: 'cyber-blue',
+  },
+  {
+    category: 'Data Structures & Algorithms',
+    icon: Code,
+    items: [
       'Data Structures',
       'Algorithms',
       'OOP',
-      'Problem Solving'
+      'Problem Solving',
+      'Debugging',
+      'Competitive Programming',
     ],
     color: 'cyber-blue',
   },
@@ -116,96 +133,83 @@ export default function Skills() {
         {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((skill, index) => (
-            <motion.div
-              key={skill.category}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -10 }}
-              className="group relative card-hover"
-            >
-              <div className="relative p-6 bg-cyber-dark/50 backdrop-blur-xl border border-cyber-blue/20 rounded-2xl overflow-hidden">
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br from-${skill.color}/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
-                
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className={`inline-flex p-4 bg-${skill.color}/10 rounded-xl mb-4 group-hover:bg-${skill.color}/20 transition-colors`}>
-                    <skill.icon className={`w-8 h-8 text-${skill.color}`} />
-                  </div>
-
-                  {/* Category */}
-                  <h3 className="text-2xl font-display font-bold text-white mb-4">
-                    {skill.category}
-                  </h3>
-
-                  {/* Skills list */}
-                  <div className="space-y-2">
-                    {skill.items.map((item, i) => (
-                      <motion.div
-                        key={item}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 + i * 0.05 }}
-                        viewport={{ once: true }}
-                        className="flex items-center gap-2 text-gray-300 font-mono text-sm"
-                      >
-                        <div className={`w-1.5 h-1.5 bg-${skill.color} rounded-full`} />
-                        <span>{item}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Progress indicator */}
-                  <div className="mt-6 h-1 bg-cyber-dark/50 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: '90%' }}
-                      transition={{ duration: 1, delay: index * 0.1 + 0.3 }}
-                      viewport={{ once: true }}
-                      className={`h-full bg-gradient-to-r from-${skill.color} to-${skill.color}/50`}
-                    />
-                  </div>
-                </div>
-
-                {/* Corner decoration */}
-                <div className={`absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-${skill.color}/20 to-transparent rounded-bl-full`} />
-              </div>
-            </motion.div>
+            <TiltCard key={skill.category} skill={skill} index={index} />
           ))}
         </div>
-
-        {/* Bottom stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {[
-            { label: 'Technologies', value: '30+' },
-            { label: 'Certifications', value: '12+' },
-            { label: 'Research Papers', value: '8' },
-            { label: 'Open Source', value: '25+' },
-          ].map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 bg-cyber-dark/30 backdrop-blur-xl border border-cyber-blue/20 rounded-2xl text-center"
-            >
-              <div className="text-4xl md:text-5xl font-display font-bold text-cyber-blue mb-2">
-                {stat.value}
-              </div>
-              <div className="text-sm font-mono text-gray-400">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
       </motion.div>
     </section>
+  )
+}
+
+function TiltCard({ skill, index }: any) {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current
+    if (!card) return
+
+    const rect = card.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+
+    const rotateX = -(y - centerY) / 20
+    const rotateY = (x - centerX) / 20
+
+    card.style.transform = `
+      perspective(1000px)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+      scale(1.05)
+    `
+  }
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return
+    cardRef.current.style.transform = `
+      perspective(1000px)
+      rotateX(0deg)
+      rotateY(0deg)
+      scale(1)
+    `
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="relative"
+    >
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="p-6 bg-cyber-dark/50 backdrop-blur-xl border border-cyber-blue/20 rounded-2xl transition-transform duration-300 ease-out will-change-transform"
+      >
+        <div className="mb-4">
+          <skill.icon className="w-8 h-8 text-cyber-blue" />
+        </div>
+
+        <h3 className="text-2xl font-display font-bold text-white mb-4">
+          {skill.category}
+        </h3>
+
+        <div className="space-y-2">
+          {skill.items.map((item: string) => (
+            <div
+              key={item}
+              className="flex items-center gap-2 text-gray-300 font-mono text-sm"
+            >
+              <div className="w-1.5 h-1.5 bg-cyber-blue rounded-full" />
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
   )
 }
