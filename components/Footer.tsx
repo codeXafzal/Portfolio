@@ -68,19 +68,13 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-white font-semibold mb-4">Newsletter</h3>
+            <h3 className="text-white font-semibold mb-4"></h3>
             <p className="text-gray-400 text-sm mb-4">
-              Stay updated with latest AI/ML projects
+             
             </p>
             <div className="flex">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="flex-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded-l-lg text-white text-sm focus:outline-none focus:border-blue-500"
-              />
-              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg transition-colors text-sm">
-                Subscribe
-              </button>
+            
+              
             </div>
           </motion.div>
         </div>
