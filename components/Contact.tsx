@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Github, Linkedin, Twitter, ExternalLink } from 'lucide-react';
+
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -123,22 +125,43 @@ const handleSubmit = async (e: React.FormEvent) => {
             </div>
 
             {/* Social Links */}
-            <div className="flex space-x-4 pt-8">
-              {['twitter', 'github', 'linkedin', 'kaggle'].map((social, index) => (
-                <motion.a
-                  key={social}
-                  href="#"
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  whileHover={{ scale: 1.2, y: -5 }}
-                  className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
-                >
-                  <span className="capitalize">{social[0].toUpperCase()}</span>
-                </motion.a>
-              ))}
-            </div>
+           {/* Social Links */}
+<div className="flex space-x-4 pt-8">
+  {[
+    {
+      icon: <Github size={20} />,
+      url: 'https://github.com/codeXafzal',
+    },
+    {
+      icon: <Linkedin size={20} />,
+      url: 'https://linkedin.com/in/afzal-khan1215',
+    },
+    {
+      icon: <Twitter size={20} />,
+      url: 'https://x.com/zal_xlr8',
+    },
+    {
+      icon: <ExternalLink size={20} />, // For Kaggle or Portfolio
+      url: 'https://www.afzalkhan.online/',
+    },
+  ].map((social, index) => (
+    <motion.a
+      key={index}
+      href={social.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, scale: 0 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ scale: 1.2, y: -5 }}
+      className="w-12 h-12 bg-blue-600/20 rounded-full flex items-center justify-center text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300"
+    >
+      {social.icon}
+    </motion.a>
+  ))}
+</div>
+
           </motion.div>
 
           {/* Contact Form */}
@@ -193,8 +216,8 @@ const handleSubmit = async (e: React.FormEvent) => {
                 onChange={handleChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-all duration-300 resize-none"
-                placeholder="Tell me about your AI/ML project..."
+                className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-transparent transition-all duration-300 resize-none"
+                placeholder="Tell me about your project or how we can collaborate..."
               />
             </div>
 
