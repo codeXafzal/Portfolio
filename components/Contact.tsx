@@ -81,7 +81,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     </svg>
                   ),
                   label: 'Email',
-                  value: 'hello@aiml.dev',
+                  value: 'afzalkhan15121@gmail.com',
                 },
                 {
                   icon: (
@@ -90,7 +90,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     </svg>
                   ),
                   label: 'Phone',
-                  value: '+1 (555) 123-4567',
+                  value: '+91 8884117846',
                 },
                 {
                   icon: (
@@ -100,7 +100,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                     </svg>
                   ),
                   label: 'Location',
-                  value: 'San Francisco, CA',
+                  value: 'Bangalore, India',
                 },
               ].map((item, index) => (
                 <motion.div
@@ -162,7 +162,7 @@ const handleSubmit = async (e: React.FormEvent) => {
                 onChange={handleChange}
                 required
                 className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-all duration-300"
-                placeholder="John Doe"
+                placeholder="Enter your name"
               />
             </div>
 
