@@ -257,7 +257,7 @@ export default function Hero() {
                   strokeLinejoin="round"
                 />
               </motion.svg>
-              Download Resume
+              View Resume
             </span>
             
             {/* Glass morphism background */}
