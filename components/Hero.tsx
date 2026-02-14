@@ -80,7 +80,7 @@ export default function Hero() {
         <div className="mb-8 sm:mb-10 md:mb-12">
           {/* Main heading with typing animation */}
           <div className="relative overflow-hidden">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-mono font-bold text-white leading-tight tracking-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-mono font-bold text-white leading-tight tracking-tight">
               {displayText.split('').map((char, index) => (
                 <motion.span
                   key={index}
